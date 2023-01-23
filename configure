@@ -6705,6 +6705,7 @@ echo "$as_me: error: Cannot find ssl headers" >&2;}
 				echo "$as_me:$LINENO: checking for SSL libraries" >&5
 echo $ECHO_N "checking for SSL libraries... $ECHO_C" >&6
 		found_ssl=no
+    ssl_static=no
 		for dir in $ssl_lib_dir $ssl_dir /usr/lib64 /usr/lib /usr/local/lib /usr/lib/ssl /usr/ssl/lib /usr/openssl/lib /usr/pkg/lib  /usr/freeware/lib/openssl /usr/sfw/lib /opt/freeware/lib; do
 			ssllibdir="$dir"
 			if test "`uname -s`" = "Darwin" ; then
@@ -6717,6 +6718,9 @@ echo $ECHO_N "checking for SSL libraries... $ECHO_C" >&6
 			if test -f "$dir/libssl.$soext"; then
 				found_ssl=yes
 			        break
+      elif test -f "$dir/libssl.a"; then
+        found_ssl=yes
+        ssl_static=yes
 			fi
 		done
 
@@ -6736,6 +6740,11 @@ cat >>confdefs.h <<_ACEOF
 _ACEOF
 
 
+    if test x_$ssl_static == x_yes; then
+      printf "SSL shared libraries not found; linking statically\n";
+      AC_DEFINE_UNQUOTED(HAVE_SSL_STATIC)
+      AC_SUBST(HAVE_SSL_STATIC)
+    fi
 
 						echo ""
 			echo "*** Generating DH Parameters for SSL/TLS ***"

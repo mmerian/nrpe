@@ -45,7 +45,7 @@
 #undef STDC_HEADERS
 #undef HAVE_STRDUP
 #undef HAVE_STRSTR
-#undef HAVE_STRTOUL 
+#undef HAVE_STRTOUL
 #undef HAVE_INITGROUPS
 #undef HAVE_CLOSESOCKET
 
@@ -223,7 +223,7 @@ typedef int int32_t;
 #ifdef HAVE_PWD_H
 #include <pwd.h>
 #endif
- 
+
 #undef HAVE_GRP_H
 #ifdef HAVE_GRP_H
 #include <grp.h>
@@ -244,6 +244,8 @@ typedef int int32_t;
 #include <err.h>
 #include <rand.h>
 #endif
+
+#undef HAVE_SSL_STATIC
 
 #undef HAVE_KRB5_H
 #ifdef HAVE_KRB5_H
